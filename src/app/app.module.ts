@@ -19,6 +19,7 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 import '../styles/app.less';
 import {HttpService} from './services/http.service';
+import {SearchComponent} from "./search/search.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -39,7 +40,8 @@ type StoreType = {
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    SearchComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
