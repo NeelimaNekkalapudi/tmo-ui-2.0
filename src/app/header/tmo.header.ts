@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppState} from '../app.service';
+import {CartModel} from '../model/cart.model';
 @Component({
   selector: 'tmo-header',
   templateUrl: './tmo.header.html'
@@ -7,14 +8,24 @@ import {AppState} from '../app.service';
 
 export class TmoHeaderComponent implements OnInit {
   public canShowNavElements: boolean;
-  public totalCartSize: number;
+  private _totalCartSize: number;
 
-  constructor(private appState: AppState) {
-
+  constructor(private appState: AppState,
+              private cartModel: CartModel) {
+    this.totalCartSize = this.cartModel.cartItems.length;
   }
 
   public ngOnInit() {
     let state = this.appState.get('value');
     this.canShowNavElements = state !== 'home';
+
+  }
+
+  set totalCartSize(value: number) {
+    this._totalCartSize = value;
+  }
+
+  get totalCartSize(): number {
+    return this._totalCartSize;
   }
 }

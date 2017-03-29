@@ -4,11 +4,31 @@ import {RouterModule} from '@angular/router';
 import {BrowserModule} from '@angular/platform-browser';
 import {SharedModule} from './shared.module';
 import {MockService} from '../services/mock.service';
+import {AccessoriesComponent} from '../accessories/accessories.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {CartComponent} from '../cart/cart.component';
+import {CartModel} from '../model/cart.model';
 
 @NgModule({
-  imports: [BrowserModule, RouterModule, SharedModule],
-  declarations: [ProductComponent],
-  exports: [ProductComponent]
+  imports: [
+    BrowserModule,
+    RouterModule,
+    SharedModule,
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule
+  ],
+  declarations: [
+    ProductComponent,
+    AccessoriesComponent,
+    CartComponent
+  ],
+  exports: [
+    ProductComponent,
+    AccessoriesComponent,
+    CartComponent
+  ]
 })
 
 export class SearchModule {
@@ -16,7 +36,7 @@ export class SearchModule {
   public static forRoot() {
     return {
       ngModule: SearchModule,
-      providers: [MockService]
+      providers: [MockService, CartModel]
     };
   }
 }

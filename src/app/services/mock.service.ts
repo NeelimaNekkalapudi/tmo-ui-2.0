@@ -6,10 +6,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import {Accessories} from '../vo/accessories.vo';
 import {Product} from '../vo/product.vo';
+
 @Injectable()
 export class MockService {
-  private result;
-
   constructor(private http: Http) {
 
   }

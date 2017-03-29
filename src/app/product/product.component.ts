@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MockService} from '../services/mock.service';
 import {AppState} from '../app.service';
+import {CartModel} from '../model/cart.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Product} from '../vo/product.vo';
 @Component({
   selector: 'search',
   templateUrl: './product.component.html',
@@ -14,19 +17,34 @@ export class ProductComponent implements OnInit {
   public currentPage = 1;
   public localState = {value: ''};
   public itemsPerPage = this.viewBy;
+  public skuForm: FormGroup;
   private productList = [];
 
-  constructor(private appState: AppState, private mockService: MockService) {
+  constructor(private appState: AppState,
+              private fb: FormBuilder,
+              private mockService: MockService,
+              private cartModel: CartModel) {
 
   }
 
   public ngOnInit() {
+    this.skuForm = this.fb.group({
+      searchItems: new FormControl('', [Validators.required, Validators.minLength(1)])
+    });
     this.submitState('product');
     this.getAllProducts();
   }
 
-  public getAccessories() {
-    console.log('Go Button Clicked');
+  public addCartItems(item) {
+    (item as Product).isProduct = true;
+    this.cartModel.addItems(item);
+  }
+
+  public getFilterProducts(value) {
+    let enterValue = value.searchItems;
+    if (enterValue.length > 0 && enterValue.trim() !== '') {
+      console.log('Go Button Clicked', value);
+    }
   }
 
   public previous(pageNo) {
