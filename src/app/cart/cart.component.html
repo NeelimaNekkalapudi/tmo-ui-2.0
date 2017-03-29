@@ -40,7 +40,7 @@
         </div>
         <div class="col-md-2">
           <div class="buttons" style="margin-top:4%" *ngIf="!(item).isAccessory">
-            <a class="btn btn-theme" [routerLink]="['/searchAccessories/:'+item.epid]">Accessories</a>
+            <a class="btn btn-theme" [routerLink]="['/searchAccessories', item.epid]">Accessories</a>
           </div>
         </div>
         <div class="col-md-1">
@@ -51,15 +51,15 @@
         </div>
       </div>
       <div class="caption-text-billing"></div>
-     <!-- <table class="table">
-        <tbody>
-        <tr>
-          <td class="ez-slat-tabled"><span class="hidden-xs">
-              Description: {{item['product_detail']['more_description']?item['product_detail']['more_description']:item['description']}}
-            </span></td>
-        </tr>
-        </tbody>
-      </table>-->
+      <!-- <table class="table">
+         <tbody>
+         <tr>
+           <td class="ez-slat-tabled"><span class="hidden-xs">
+               Description: {{item['product_detail']['more_description']?item['product_detail']['more_description']:item['description']}}
+             </span></td>
+         </tr>
+         </tbody>
+       </table>-->
     </div>
   </div>
   <div class="col-md-12 buttons" style="margin-left:65%">&nbsp;</div>
