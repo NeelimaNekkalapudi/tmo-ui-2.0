@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "epid": "qgqvhirug4=",
+    "availability": "AVAILABLE",
+    "name": "iPhone 6s",
+    "description": "iphone 6s great display and software made for the hardware",
+    "retailPrice": "549.00",
+    "salePrice": "549.00",
+    "promotion": 1,
+    "size": "Standard",
+    "configuration": "16 GB",
+    "color": "White",
+    "skuid": "47",
+    "picture": "http://ec2-54-149-225-7.us-west-2.compute.amazonaws.com/mobile_ui/img/Apple_iPhone_6S_1.jpg",
+    "active": 1,
+    "contract": "24 months",
+    "store": "T-Mobile"
+  }
+]

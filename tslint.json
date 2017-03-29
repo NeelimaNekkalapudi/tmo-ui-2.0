@@ -23,6 +23,7 @@
     "switch-default": false,
     "no-empty": false,
     "no-trailing-whitespace": false,
+    "experimentalDecorators": false,
     "align": [true, "parameters", "statements"],
     "quotemark": [true, "single", "double", "avoid-escape"],
     "variable-name": [

@@ -18,8 +18,9 @@ import {AppComponent} from './app.component';
 import '../styles/styles.scss';
 import '../styles/headings.css';
 import '../styles/app.less';
-import {HttpService} from './services/http.service';
-import {SearchComponent} from "./search/search.component";
+import {MockService} from './services/mock.service';
+import {SharedModule} from './modules/shared.module';
+import {CoreModule} from './modules/core.module';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -39,12 +40,12 @@ type StoreType = {
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [
-    AppComponent,
-    HomeComponent,
-    SearchComponent
+    AppComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
+    SharedModule,
+    CoreModule.forRoot(),  // forRoot so we get all the providers
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
@@ -56,7 +57,7 @@ type StoreType = {
     APP_PROVIDERS,
     ErrorHandleService,
     FormHelperService,
-    HttpService
+    MockService
   ]
 })
 export class AppModule {

@@ -1,0 +1,74 @@
+<tmo-header></tmo-header>
+<div style="padding-top:20px;margin-left:300px">
+  <form class="form-horizontal" name="feedbackForm">
+    <div class="form-group">
+      <label for="searchItems" class="col-sm-2 control-label search-label">Search Items</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="searchItems" name="searchItems" placeholder="Search"
+               [ngModel]="skuId" submit-required="true">
+      </div>
+      <div class="buttons col-sm-2">
+        <a class="btn btn-theme" (click)="getAccessories()">Go</a>
+      </div>
+    </div>
+    <div class="loading" *ngIf="showLoader">Loading&#8230;</div>
+  </form>
+</div>
+
+<div *ngIf="productList.length === 0" class="text-center" style="color:#a1b1bc">No Results Found</div>
+<div class="content-area" *ngIf="productList.length > 0">
+  <!-- SECTION-->
+  <section class="page-section with-sidebar sub-page">
+    <div class="container">
+      <div class="row">
+        <!-- CONTENT -->
+        <div class="col-md-4" id="content"
+             *ngFor="let product of productList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+          <!-- Excursion Listing -->
+          <div class="thumbnail no-border  content no-padding thumbnail-ez-ezd clear-fix">
+            <div (click)="getAccessoryDetails(product.id);">
+              <div class="media">
+                <a class="media-link" data-gal="prettyPhoto">
+                  <img src="{{product.picture}}" class="ez-thumbnail-photo" alt="">
+                  <span class="icon-view"><strong><i class="fa fa-eye"></i></strong></span>
+                </a>
+              </div>
+              <div class="caption tmo-caption">
+                <h4 class="caption-title">
+                  <span class="pull-left accessories-name">{{product.name}}</span>
+                  <span class="pull-right">SKU: {{product.skuid}}</span></h4>
+                <table class="table">
+                  <tbody>
+                  <tr class="bt0">
+                    <td class="bt0"><strong>Color: </strong>{{product.color}}</td>
+                    <td class="bt0 bl0"><strong>Retail Price:</strong><span class="tmo-strike"> {{product.retailPrice}} </span>
+                    </td>
+                  </tr>
+                  <tr class="bt0">
+                    <td class="bt0"><strong>Size: </strong>{{product.size}}</td>
+                    <td class="bt0 bl0"><strong>Sale Price:</strong> {{product.salePrice}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+                <div class="caption-text ellipsis">Description: {{product.description}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="productList.length > viewBy">
+        <ul style="padding-top:5%;padding-left:5%">
+          <li class="buttons col-sm-2" *ngIf="currentPage > 1">
+            <a class="btn btn-theme" (click)="previous(currentPage)">Previous</a>
+          </li>
+          <li class="buttons col-sm-2 pull-right" *ngIf="currentPage * 3 < totalItems">
+            <a class="btn btn-theme" (click)="next(currentPage)">Next</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /CONTENT -->
+    </div>
+  </section>
+  <!-- /SECTION -->
+</div>

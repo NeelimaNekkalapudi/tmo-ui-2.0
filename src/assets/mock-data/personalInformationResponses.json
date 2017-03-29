@@ -1,0 +1,9 @@
+{
+  "message": "Successfully Saved the Customer Personal Information in to the database",
+  "error": 0,
+  "orderdetails": [
+    {
+      "orderid": 1
+    }
+  ]
+}

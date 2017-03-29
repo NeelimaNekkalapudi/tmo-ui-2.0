@@ -13,7 +13,7 @@ import {AppState} from '../app.service';
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-  public currentEvents = [];
+  public successMessage = false;
   // Set our default values
   public localState = {value: ''};
   // TypeScript public modifiers
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   public ngOnInit() {
-    console.log('hello `Home` component');
+    this.submitState('home');
   }
 
   public submitState(value: string) {

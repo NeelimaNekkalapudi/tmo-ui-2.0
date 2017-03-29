@@ -1,0 +1,18 @@
+{
+  "orderid": "string",
+  "shiptype": "string",
+  "shipaddress1": "string",
+  "shipaddress2": "string",
+  "shipcity": "string",
+  "shipstate": "string",
+  "shipzip": "string",
+  "billaddress1": "string",
+  "billaddress2": "string",
+  "billcity": "string",
+  "billstate": "string",
+  "billzip": "string",
+  "cardno": "string",
+  "expirydate": "string",
+  "cvv": "string",
+  "store": "string"
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "epid": "qgqvhjjvg4wtami=",
+    "name": "Lightning to USB Cable (2 m)",
+    "description": "Capacity 64 GB MicroSDXC Class 10 Read Speed: 80 MB/s",
+    "retailPrice": 299.95,
+    "salePrice": 299.95,
+    "promotion": 1,
+    "size": "M",
+    "configuration": "16 GB",
+    "color": "White",
+    "skuid": "45-001",
+    "picture": "http://ec2-54-149-225-7.us-west-2.compute.amazonaws.com/mobile_ui/img/lightning-usb-201609.png",
+    "active": 1,
+    "contract": "24 months",
+    "store": "T-Mobile",
+    "accessory_detail": {
+      "id": 1,
+      "accessory_id": 1,
+      "more_description": "490 mins of Full HD Video or 1050 mins of HD Video or 15330 Songs, Save Over 5470 Photos, EMC (FCC, CE, VCCI, NATA) Certified, Smartphone, Tablet, Camera, Full HD Video Recording Support. Minimum Storage Temperature: -407deg;C, Resist Magnetic Fields of upto 15000 Gauss, Can Survive Upto 72 Hours in Seawater",
+      "warranty": "10 Year Limited Warranty",
+      "processor": "xww",
+      "vendor": "SAMSUNG",
+      "store_num": "IN"
+    }
+  }
+]

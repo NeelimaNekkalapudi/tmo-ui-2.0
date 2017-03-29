@@ -1,0 +1,15 @@
+{
+  "message": "Successfully Got the Credit Score Range Type from the database",
+  "error": 0,
+  "items": [
+    {
+      "id": "AWESOME-CREDIT"
+    },
+    {
+      "id": "AVERAGE-CREDIT"
+    },
+    {
+      "id": "GOOD-CREDIT"
+    }
+  ]
+}

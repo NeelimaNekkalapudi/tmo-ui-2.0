@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "epid": "qgqvhkdjkbug63tfkncq=",
+    "name": "Samsung Galaxy On Nxt",
+    "description": "Flaunt your style with the Samsung Galaxy On Nxt. Featuring a drool-worthy body and impressive features, this smartphone is built to perform. Talk to your mom, chat with your friends, browse the Internet - stay connected the way that suits you best - this smartphone is powerful enough to keep up with your busy lifestyle.",
+    "retailPrice": 369,
+    "salePrice": 340,
+    "promotion": 1,
+    "size": "M",
+    "configuration": "32GB",
+    "color": "Gold",
+    "skuid": "45",
+    "picture": "http://maktechblog.com/wp-content/uploads/2016/09/Samsung-Galaxy-J7-Prime.jpeg",
+    "active": 1,
+    "contract": "1 year",
+    "store": "US",
+    "product_detail": {
+      "id": 1,
+      "product_id": 1,
+      "more_description": "Featuring a full-metal unibody and a screen thatâ€™s equipped with 2.5D Gorilla Glass, this smartphone is as attractive as it is tough. Its 13.88 cm full HD display will bring all your photos and videos to life in crystal-clear detail.",
+      "warranty": "1 year",
+      "processor": "Exynos 7870 Octa Core 1.6 GHz",
+      "vendor": "SAMSUNG",
+      "store_num": "US"
+    }
+  }
+]

@@ -1,9 +1,9 @@
 import {Routes} from '@angular/router';
 import {HomeComponent} from './home';
-import {SearchComponent} from './search/search.component';
+import {ProductComponent} from './product/product.component';
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
-  {path:'searchProducts', component:SearchComponent}
+  {path:'searchProducts', component:ProductComponent}
 
 ];
