@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Item} from '../vo/item.vo';
 import {Accessories} from '../vo/accessories.vo';
 import {AppState} from '../app.service';
+import {Router} from "@angular/router";
 @Component({
   selector: 'addTo-cart',
   templateUrl: './cart.component.html'
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
   private data: Observable<CartModel>;
 
   constructor(private appState: AppState,
-              private cartModel: CartModel) {
+              private cartModel: CartModel,private router: Router) {
 
   }
 
@@ -43,5 +44,10 @@ export class CartComponent implements OnInit {
   private submitState(value) {
     console.log('submitState', value);
     this.appState.set('value', value);
+  }
+
+  public checkout(cartItems:Item[]){
+    let link = ['/checkout'];
+    this.router.navigate(link);
   }
 }

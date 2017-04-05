@@ -9,6 +9,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {CartComponent} from '../cart/cart.component';
 import {CartModel} from '../model/cart.model';
+import {CheckoutPersonalComponent} from '../checkout/checkout.personalcomponent';
+import {CheckoutShippingInforamtionComponent} from '../checkout/checkout.shippinginformation';
+import {CheckoutCreditInformation} from '../checkout/checkout.creditinformation';
 
 @NgModule({
   imports: [
@@ -22,12 +25,18 @@ import {CartModel} from '../model/cart.model';
   declarations: [
     ProductComponent,
     AccessoriesComponent,
-    CartComponent
+    CartComponent,
+    CheckoutPersonalComponent,
+    CheckoutShippingInforamtionComponent,
+    CheckoutCreditInformation
   ],
   exports: [
     ProductComponent,
     AccessoriesComponent,
-    CartComponent
+    CartComponent,
+    CheckoutPersonalComponent,
+    CheckoutShippingInforamtionComponent,
+    CheckoutCreditInformation
   ]
 })
 

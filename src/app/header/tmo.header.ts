@@ -26,6 +26,6 @@ export class TmoHeaderComponent implements OnInit {
   }
 
   get totalCartSize(): number {
-    return this._totalCartSize;
+    return this.cartModel.cartItems.length;
   }
 }

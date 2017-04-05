@@ -40,7 +40,7 @@
         </div>
         <div class="col-md-2">
           <div class="buttons" style="margin-top:4%" *ngIf="!(item).isAccessory">
-            <a class="btn btn-theme" [routerLink]="['/searchAccessories', item.epid]">Accessories</a>
+            <a class="btn btn-theme" [routerLink]="['/searchAccessories']">Accessories</a>
           </div>
         </div>
         <div class="col-md-1">
@@ -68,8 +68,9 @@
     <div class="col-md-4 buttons" style="margin-left:83%"><Strong>Total Count: {{totalCartAmount}}</Strong>
     </div>
     <div class="col-md-4 buttons" style="margin-left:65%">
-      <a class="btn btn-theme" data-toggle="modal" data-target="#bookModal"
+     <a class="btn btn-theme" data-toggle="modal" data-target="#bookModal"
          (click)="checkout(cartItemsDetails)">Checkout</a></div>
+    <!--<a class="btn btn-theme" [routerLink]="['/checkout']">Checkout</a>-->
   </div>
   <div *ngIf="cartItemsDetails.length == 0">
     <div class="noItems">CART EMPTY</div>
