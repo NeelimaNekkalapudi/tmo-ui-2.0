@@ -13,72 +13,80 @@
           <div class="col-md-9 content field-container" id="content" >
             <h3 class="block-title alt">Personal Information</h3>
             <!--Start of form -->
-            <form class="form-delivery" name="personalInfoForm" novalidate>
+            <form class="form-delivery" #personalInfoForm="ngForm" novalidate>
               <div class="row profile-alert-min">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input name="firstname" type="text" ng-model="personalInfo.firstname" class="form-control alt"
-                           ng-required="true" placeholder="First Name:*">
-                    <!--<ul>
-                      <li ng-show="!personalInfoForm.firstname.$pristine && personalInfoForm.firstname.$error.required" class="tmo-error">First name is required.</li>
-                    </ul>-->
+                    <input id="firstName" name="firstName" [(ngModel)]="personalInfo.firstName" required #firstName="ngModel"
+                           type="text" class="form-control" placeholder="First Name:*" minlength="1">
+                    <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)"
+                         class="tmo-error">
+                      <div [hidden]="!firstName.errors.required">
+                        First Name is required
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input name="lastname" type="text" ng-model="personalInfo.lastname" data-toggle="tooltip" class="form-control alt"  placeholder="Last Name:*" required>
-                   <!-- <ul>
-                      <li ng-show="!personalInfoForm.lastname.$pristine && personalInfoForm.lastname.$error.required" class="tmo-error">Last name is required.</li>
-                    </ul>-->
+                    <input name="lastName" type="text" class="form-control"  placeholder="Last Name:*" required
+                           [(ngModel)]="personalInfo.lastName" #lastName="ngModel" minlength="1">
+                    <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)"
+                         class="tmo-error">
+                      <div [hidden]="!lastName.errors.required">
+                        Last Name is required
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input name="email" type="email" ng-model="personalInfo.email" data-toggle="tooltip" class="form-control alt" placeholder="Email Address:*"
-                           ng-required="true">
-                   <!-- <ul>
-                      <li ng-show="!personalInfoForm.email.$pristine && personalInfoForm.email.$error.required" class="tmo-error">Email Id is required.</li>
-                      <li ng-show="personalInfoForm.email.$error.email" class="tmo-error">Not a valid email!</li>
-                    </ul>-->
+                    <input name="email" type="email" class="form-control alt" placeholder="Email Address:*"
+                           required [(ngModel)]="personalInfo.email" #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+                    <div *ngIf="email.errors && (email.dirty || email.touched)"
+                         class="tmo-error">
+                      <div [hidden]="!email.errors.required">
+                        Email Id is required.
+                      </div>
+                      <div [hidden]="email.errors.valid">
+                        Not a valid email!
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input name="cemail" ng-model="personalInfo.cemail" type="email" data-toggle="tooltip" tmo-match="personalInfo.email" class="form-control alt"
-                           placeholder="Confirm Email Address:*" ng-required="true">
-                    <!--<ul>
-                      <li ng-show="!personalInfoForm.cemail.$pristine && personalInfoForm.cemail.$error.required" class="tmo-error">Email Id is required.</li>
-                      <li ng-show="personalInfoForm.cemail.$error.cemail" class="tmo-error">Not a valid email!</li>
-                      <li ng-show="personalInfoForm.cemail.$error.match" class="tmo-error">Emails have to match!</li>
-                    </ul>-->
+                    <input name="confirmEmail" type="email" class="form-control alt" required [(ngModel)]="personalInfo.confirmEmail"
+                           #confirmEmail="ngModel" placeholder="Confirm Email Address:*" validateEqual="email"
+                           pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+                    <ul>
+                      <li [hidden]="confirmEmail.pristine || confirmEmail.valid" class="tmo-error">Emails have to match!</li>
+                    </ul>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input name="phone" ng-model="personalInfo.phone" data-toggle="tooltip" ng-pattern="numberPattern" class="form-control alt"
-                           type="text" placeholder="Enter Phone Number" ng-required="true" ng-minlength="10" ng-maxlength="10">
-                   <!-- <ul>
-                      <li ng-show="!personalInfoForm.phone.$pristine && personalInfoForm.phone.$error.required" class="tmo-error">Phone Number is required.</li>
-                      <li ng-show="personalInfoForm.phone.$error.minlength" class="tmo-error">Phone no not less that 10 char.</li>
-                      <li ng-show="personalInfoForm.phone.$error.maxlength" class="tmo-error">Phone no not more than 11 char.</li>
-                      <li ng-show="personalInfoForm.phone.$error.pattern" class="tmo-error">Not a Valid Number</li>
-                    </ul>-->
+                    <input name="phoneNumber" [(ngModel)]="personalInfo.phoneNumber" class="form-control alt"
+                           type="text" placeholder="Enter Phone Number" minlength="10" maxlength="10"
+                            #phoneNumber="ngModel">
 
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <select name="currentcarrier" ng-model="personalInfo.currentcarrier" class="form-control alt selectpicker" ng-options="carrier for carrier in currentCarriers" data-width="100%" data-toggle="tooltip" title="Select" ng-required="true">
-                      <option value="" selected="selected">--Select Carrier*--</option>
+                    <select name="currentcarrier"  class="form-control alt selectpicker" [(ngModel)]="personalInfo.selectedCarrier"
+                            #carrier (ngModelChange)="onChange($event, carrier.value)" data-width="100%" title="Select" required>
+                      <option value="">--Select Carrier*--</option>
+                      <option *ngFor="let carrier of personalInfo.carriers" [ngValue]="carrier" >{{carrier}}</option>
                     </select>
-                    <!--<ul>
-                      <li ng-show="!personalInfoForm.currentcarrier.$pristine && personalInfo.currentcarrier == undefined || personalInfo.currentcarrier == ''" class="tmo-error">Please select Carriers.</li>
-                    </ul>-->
+                    <ul>
+                      <li [hidden]="personalInfo.selectedCarrier != undefined || personalInfo.selectedCarrier != ''" class="tmo-error">Please select Carriers.</li>
+                    </ul>
                   </div>
                 </div>
                 <div class="col-md-12">
-                  <a class="btn btn-theme" data-toggle="modal" data-target="#bookModal" ng-disabled="personalInfoForm.$invalid"
-                     (click)="savePersonalInfo()">Next</a>
+                  <button class="btn btn-theme" [disabled]="!personalInfoForm.form.valid"
+                     (click)="savePersonalInfo()">Next</button>
                   <!--<a class="btn btn-theme" [routerLink]="['/checkout/billandship']">Next</a> savePersonalInfo(personalInfo)-->
                 </div>
               </div>
