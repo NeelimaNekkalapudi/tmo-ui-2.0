@@ -74,14 +74,17 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <select name="currentcarrier"  class="form-control alt selectpicker" [(ngModel)]="personalInfo.selectedCarrier"
-                            #carrier (ngModelChange)="onChange($event, carrier.value)" data-width="100%" title="Select" required>
+                    <select id="selectedCarrier" name="selectedCarrier"  class="form-control alt selectpicker" [(ngModel)]="personalInfo.selectedCarrier"
+                            #selectedCarrier="ngModel" data-width="100%" title="Select" required>
                       <option value="">--Select Carrier*--</option>
                       <option *ngFor="let carrier of personalInfo.carriers" [ngValue]="carrier" >{{carrier}}</option>
                     </select>
-                    <ul>
-                      <li [hidden]="personalInfo.selectedCarrier != undefined || personalInfo.selectedCarrier != ''" class="tmo-error">Please select Carriers.</li>
-                    </ul>
+                    <div *ngIf="selectedCarrier.errors && (selectedCarrier.dirty || selectedCarrier.touched)"
+                         class="tmo-error">
+                      <div [hidden]="!selectedCarrier.errors.required">
+                        Please select Carriers.
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-12">
