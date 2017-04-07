@@ -62,7 +62,7 @@ export class CheckoutShippingInforamtionComponent implements OnInit {
 
   public  saveBillShipInfo()
   {
-    if (this.shippingInfo.isSameAddress)
+    if (this.shippingInfo && this.shippingInfo.isSameAddress)
     {
       this.shippingInfo.billingAddress1 = this.shippingInfo.shippingAddress1;
       this.shippingInfo.billingAddress2 = this.shippingInfo.shippingAddress2;

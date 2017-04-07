@@ -97,8 +97,8 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <input id="billingAddress1" name="billingAddress1" [(ngModel)]="shippingInfo.billingAddress1"
-                              required #billingAddress1="ngModel" type="text" class="form-control"
-                              placeholder="Billing Address Line1:*" minlength="1">
+                             required #billingAddress1="ngModel" type="text" class="form-control"
+                             placeholder="Billing Address Line1:*" minlength="1">
                       <div *ngIf="billingAddress1.errors && (billingAddress1.dirty || billingAddress1.touched)"
                            class="tmo-error">
                         <div [hidden]="!billingAddress1.errors.required">
@@ -188,12 +188,11 @@
                   <div class="form-group row" cc-exp>
                     <div class="col-xs-4">
                       <input id="cardMonth" placeholder="MM*" type="text" class="form-control alt" name="cardMonth"
-                             [(ngModel)]="shippingInfo.cardMonth" #cardMonth="ngModel" required>
-
+                             [(ngModel)]="shippingInfo.cardMonth" #cardMonth="ngModel" required minlength="2" maxlength="2">
                     </div>
 
                     <div class="col-xs-4">
-                      <input id="cardYear" placeholder="YY*" type="text" class="form-control alt"
+                      <input id="cardYear" placeholder="YY*" type="text" class="form-control alt" minlength="2" maxlength="2"
                              name="cardYear" [(ngModel)]="shippingInfo.cardYear" #cardYear="ngModel" required>
                     </div>
                   </div>
@@ -201,11 +200,10 @@
                 <div class="col-md-2">
                   <div class="form-group">
                     <input id="cardCvv" name="cardCvv" [(ngModel)]="shippingInfo.cardCvv" data-toggle="tooltip" class="form-control alt"
-                           type="text" placeholder="CVV:*" #cardCvv="ngModel" required pattern="/^[0-9]+$/" minlength="3" maxlength="4">
+                           type="text" placeholder="CVV:*" #cardCvv="ngModel" required minlength="3" maxlength="4">
                     <div *ngIf="cardCvv.errors && (cardCvv.dirty || cardCvv.touched)"
                          class="tmo-error">
                       <div [hidden]="!cardCvv.errors.required">Security code required</div>
-                      <div [hidden]="!cardCvv.valid">Security code must contain only numbers</div>
                       <div [hidden]="!cardCvv.minlength">Security code must be 3-4 digits</div>
                     </div>
                   </div>
@@ -222,14 +220,13 @@
                       Please select CreditRating.
                     </div>
                   </div>
-
                 </div>
 
 
                 <div class="col-md-12">
                   <!--<a class="btn btn-theme" data-toggle="modal" data-target="#bookModal" ng-disabled="shippingInfoForm.$invalid"
                      (cl)="saveBillShipInfo(shippingInfo)">Next</a>-->
-                  <button class="btn btn-theme" (click)="saveBillShipInfo()">Next</button>
+                  <button class="btn btn-theme" (click)="saveBillShipInfo()" [disabled]="!shippingInfoForm.form.valid">Next</button>
                 </div>
               </div>
             </form>

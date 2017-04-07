@@ -3,10 +3,8 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {CartModel} from '../model/cart.model';
-import {Observable} from 'rxjs';
-import {Item} from '../vo/item.vo';
-import {Accessories} from '../vo/accessories.vo';
 import {AppState} from '../app.service';
+import {CreditInfoForm} from '../vo/creditInfoForm.vo';
 
 @Component({
   selector: 'addTo-cart',
@@ -15,6 +13,11 @@ import {AppState} from '../app.service';
 
 export class CheckoutCreditInformation implements OnInit {
 
+  public idTypeList:any;
+  public stateList:any;
+  public creditInfo:CreditInfoForm;
+  public isAgreed:Boolean;
+
   constructor(private appState: AppState,
               private cartModel: CartModel) {
 
@@ -22,6 +25,19 @@ export class CheckoutCreditInformation implements OnInit {
 
   public ngOnInit() {
     this.submitState('cart');
+
+    this.idTypeList = ["State issued ID","Drivers License","Military ID","Passport","Federal issued disability ID","US issued alien ID","Mexican matricula ID"];
+    this.stateList = ["AL","AK","AZ","AR","CA","CO","CT","DE","DC","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
+    this.creditInfo = {
+      idType : '',
+      creditState : '',
+      dob : '',
+      expYear : '',
+      idNumber : '',
+      ssn : '',
+      expMonth : ''
+    };
+    this.isAgreed = false;
   }
 
 
