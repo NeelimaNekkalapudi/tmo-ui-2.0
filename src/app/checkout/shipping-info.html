@@ -1,0 +1,219 @@
+<tmo-header></tmo-header>
+<div class="wizard">
+  <a [routerLink]="['../../checkout']">
+    <span class="badge">1</span>Personal Information
+  </a>
+  <a class="current">
+    <span class="badge badge-inverse">2</span>Shipping & Billing Address
+  </a>
+  <span class="badge">3</span>Credit Information
+</div>
+
+<div class="wrapper">
+  <div class="content-area">
+    <section class="page-section with-sidebar sub-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 content field-container" id="content">
+            <!--Start of form -->
+            <form class="form-delivery" [formGroup]="shippingForm" novalidate>
+              <div class="row profile-alert-min">
+                <h3 class="block-title alt">Shipping Address</h3>
+                <div class="row profile-alert-min">
+                  <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'address1')}">
+                      <input type="text" class="form-control alt" formControlName="address1"
+                             placeholder="Shipping Address Line1: *" required>
+                      <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['address1'].invalid">
+                        address1 more than 3 letters
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'address2')}">
+                      <input type="text" class="form-control alt" formControlName="address2"
+                             placeholder="Shipping Address Line2: *" required>
+                      <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['address2'].invalid">
+                        address2 more than 3 letters
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'city')}">
+                      <input class="form-control alt" type="text" formControlName="city"
+                             placeholder="City:*" required>
+                      <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['city'].invalid">
+                        city more than 3 letters
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'state')}">
+                      <select formControlName="state" class="form-control alt"
+                              title="Select" required>
+                        <option value="" disabled> State</option>
+                        <option *ngFor="let option of statesList" value="{{option.name}}">{{option.name}}</option>
+                      </select>
+                      <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['state'].invalid">
+                        select State
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'zip')}">
+                      <input class="form-control alt" type="text" formControlName="zip" mask="00000-0000"
+                             placeholder="Zip: *" [minlength]="5" [maxlength]="10" required>
+                      <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['zip'].invalid">Enter
+                        ZIP number
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="checkbox-inline ">
+                    <input id="accept" type="checkbox" [checked]="copyShippingAddress"
+                           (change)="copyAddressToBillingAddress($event.target.checked);">
+                    <label style="font-size: small" for="accept">Use same address for billing</label>
+                  </div>
+                </div>
+                <!--Billing Address-->
+                <div *ngIf="!copyShippingAddress">
+                  <div class="col-md-12">
+                    <h3 class="block-title alt">Billing Address</h3>
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'billAddress1')}">
+                      <input class="form-control alt" type="text" formControlName="billAddress1"
+                             placeholder="Billing Address Line1:*" required>
+                      <small class="text-danger"
+                             *ngIf="isFormSubmitted && shippingForm.controls['billAddress1'].invalid">
+                        Enter billAddress1 more than 3 letters
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'billAddress2')}">
+                      <input class="form-control alt" type="text"
+                             formControlName="billAddress2" placeholder="Billing Address Line2:*" required>
+                      <small class="text-danger"
+                             *ngIf="isFormSubmitted && shippingForm.controls['billAddress2'].invalid">
+                        Enter billAddress2 more than 3 letters
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'billCity')}">
+                      <input class="form-control alt" type="text" formControlName="billCity"
+                             placeholder="City:*" required>
+                      <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['billCity'].invalid">
+                        Enter bill City number
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'billState')}">
+                      <select class="form-control alt" formControlName="billState"
+                              title="Select" required>
+                        <option value="" disabled>State</option>
+                        <option *ngFor="let option of statesList" value="{{option.name}}">{{option.name}}</option>
+                      </select>
+                      <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['billState'].invalid">
+                        Please Select State
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'billZip')}">
+                      <input class="form-control alt" type="text" formControlName="billZip" mask="00000-0000"
+                             title="billing zip code" placeholder="Zip: *" [maxlength]="5" required>
+                      <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['billZip'].invalid">
+                        Enter billZip number
+                      </small>
+                    </div>
+                  </div>
+                </div>
+
+                <!--  Credit Info-->
+                <div class="col-md-12">
+                  <h3 class="block-title alt">Card Information</h3>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'customerName')}">
+                    <input class="form-control alt" type="text" formControlName="customerName"
+                           placeholder="Name on Card:*" required>
+                    <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['customerName'].invalid">
+                      Enter card holder name
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6" style="margin: 0;">
+                  <div class="form-inline">
+                    <div class="form-group col-md-9" style="padding: 0;"
+                         [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'cardNumber')}">
+                      <input type="text" class="form-control alt" placeholder="Card Number: *"
+                             style="width: 300px;" formControlName="cardNumber"
+                             (keyup)="cardNumberKeyUp()" [minlength]="14" [maxlength]="16"
+                             onlyNumber="true" required>
+                      <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['cardNumber'].invalid">
+                        Enter valid card number
+                      </small>
+                    </div>
+                    <div class="form-group col-md-3 pull-right" style="padding: 0;">
+                      <div>
+                        <span> &nbsp; {{selectedCard}} </span>
+                      </div>
+                      <img style="padding-left: 9px; width: 50px;" src="{{ccImgSrc}}">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-xs-2" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'expMonth')}">
+                    <input class="form-control alt" type="text" placeholder="MM *"
+                           formControlName="expMonth" [maxlength]="2" onlyNumber="true" required>
+                    <small class="text-danger" *ngIf="shippingForm.hasError('invalidMonth')">
+                      Invalid month
+                    </small>
+                    <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['expMonth'].invalid">
+                      Enter card exp month
+                    </small>
+                  </div>
+                  <div class="col-xs-2">
+                    <input type="text" class="form-control alt" placeholder="YY *"
+                           formControlName="expYear" [maxlength]="2" onlyNumber="true" required>
+                    <small class="text-danger" *ngIf="shippingForm.hasError('invalidYear')">
+                      Invalid year
+                    </small>
+                    <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['expYear'].invalid">
+                      Enter card exp year
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'cvv')}">
+                    <input class="form-control alt" type="text" onlyNumber="true" formControlName="cvv"
+                           [minlength]="3" [maxlength]="4" placeholder="CVV: *" required>
+                    <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['cvv'].invalid">
+                      Enter CVV
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6" [ngClass]="{ 'has-error':fh.hasError(shippingForm, 'rating')}">
+                  <select class="form-control alt" formControlName="rating" title="Select" required>
+                    <option value="" disabled>Select CreditRating*</option>
+                    <option *ngFor="let option of creditTypesList" value="{{option}}">{{option}}</option>
+                  </select>
+                  <small class="text-danger" *ngIf="isFormSubmitted && shippingForm.controls['rating'].invalid">
+                    Please select rating
+                  </small>
+                </div>
+                <div class="col-md-12">
+                  <button (click)="shoppingFormHandler(shippingForm)" class="btn btn-theme">Next</button>
+                  <!--[disabled]="!shippingForm.valid"-->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+

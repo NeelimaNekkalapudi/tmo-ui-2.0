@@ -6,15 +6,15 @@
     "node_modules/codelyzer"
   ],
   "rules": {
-    // Custom
     "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
     "interface-name": false,
-    // General
     "no-console": [true, "time", "timeEnd", "trace"],
     "whitespace": false,
     "indent": [true, "spaces"],
     "max-line-length": [true, 300],
-    "no-string-literal": true,
+    "no-string-literal": false,
+    "forin": false,
+    "radix": false,
     "comment-format": true,
     "no-use-before-declare": true,
     "object-literal-sort-keys": false,

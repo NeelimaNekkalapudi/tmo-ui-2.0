@@ -6,7 +6,7 @@
  * the same name as the attribute you want to operate on, but prefix with =
  *
  * Example:
- * { name: 'msapplication-TileImage', content: '/assets/icon/ms-icon-144x144.png', '=content': true },
+ * { name: 'ms-application-TileImage', content: '/assets/icon/ms-icon-144x144.png', '=content': true },
  * Will prefix the publicPath to content.
  *
  * { rel: 'apple-touch-icon', sizes: '57x57', href: '/assets/icon/apple-icon-57x57.png', '=href': false },
@@ -29,10 +29,10 @@ module.exports = {
     /** <link> tags for android web app icons **/
     { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/assets/icon/android-icon-192x192.png' },
 
-    /** <link> tags for favicons **/
+    /** <link> tags for fav-icons **/
+    { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/icon/favicon-16x16.png' },
     { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/assets/icon/favicon-32x32.png' },
     { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/assets/icon/favicon-96x96.png' },
-    { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/assets/icon/favicon-16x16.png' },
 
     /** <link> tags for a Web App Manifest **/
     { rel: 'manifest', href: '/assets/manifest.json' }

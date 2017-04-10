@@ -4,6 +4,7 @@ import {AppState} from '../app.service';
 import {CartModel} from '../model/cart.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../vo/product.vo';
+import {ArrayUtil} from '../utils/array.util';
 @Component({
   selector: 'search',
   templateUrl: './product.component.html',
@@ -18,6 +19,7 @@ export class ProductComponent implements OnInit {
   public localState = {value: ''};
   public itemsPerPage = this.viewBy;
   public skuForm: FormGroup;
+  public searchMaxLength: number = 2;
   private productList = [];
 
   constructor(private appState: AppState,
@@ -42,23 +44,24 @@ export class ProductComponent implements OnInit {
 
   public getFilterProducts(value) {
     let enterValue = value.searchItems;
+    console.log(' Enter value is  :: ', enterValue);
     if (enterValue.length > 0 && enterValue.trim() !== '') {
-      console.log('Go Button Clicked', value);
+      this.productList = ArrayUtil.filterArray(this.productList, enterValue);
+    } else {
+      this.getAllProducts();
     }
   }
 
   public previous(pageNo) {
-    console.log('Previous page Is :::', pageNo);
     this.currentPage--;
   }
 
-  public next(pageNo) {
-    console.log('Next page Is :::', pageNo);
+  public next(pageNo): void {
     this.currentPage++;
   }
 
-  public getAccessoryDetails() {
-
+  public getProductDetails(id): void {
+    console.log(' Product Details :: ', id);
   }
 
   public submitState(value: string) {

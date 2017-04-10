@@ -1,0 +1,125 @@
+<tmo-header></tmo-header>
+<div class="wizard">
+  <a [routerLink]="['../../checkout']">
+    <span class="badge">1</span>Personal Information
+  </a>
+  <a [routerLink]="['../billedShip']">
+    <span class="badge">2</span>Shipping & Billing Address
+  </a>
+  <a class="current">
+    <span class="badge badge-inverse">3</span>Credit Information
+  </a>
+</div>
+
+<div class="wrapper">
+  <div class="content-area">
+    <section class="page-section with-sidebar sub-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 content field-container" id="content">
+            <!--Start of form -->
+            <form class="form-delivery" [formGroup]="creditForm" novalidate>
+              <div class="row profile-alert-min">
+                <div class="col-md-12">
+                  <h3 class="block-title alt">Credit Information</h3>
+                </div>
+                <div class="col-md-6" [ngClass]="{ 'has-error':fh.hasError(creditForm, 'idType')}">
+                  <select class="form-control alt" formControlName="idType"
+                          title="Select" required>
+                    <option value="" disabled>ID Type*</option>
+                    <option *ngFor="let id of idTypeList" value="{{id}}">{{id}}</option>
+                  </select>
+                  <small class="text-danger" *ngIf="isFormSubmitted && creditForm.controls['state'].invalid">
+                    select State
+                  </small>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(creditForm, 'idNumber')}">
+                    <input class="form-control alt" formControlName="idNumber"
+                           type="text" placeholder="ID Number(A1234567890):*"
+                           [maxlength]="20" required>
+                  </div>
+                </div>
+                <div class="col-md-6" style="padding: 0; margin: 0">
+                  <div class="form-group">
+                    <div class="col-xs-4" [ngClass]="{ 'has-error':fh.hasError(creditForm, 'expMonth')}">
+                      <input type="text" class="form-control alt" placeholder="MM*" [maxlength]="2"
+                             formControlName="expMonth" required>
+                      <small class="text-danger" *ngIf="creditForm.hasError('invalidMonth')">
+                        Invalid month
+                      </small>
+                      <small class="text-danger" *ngIf="isFormSubmitted && creditForm.controls['expMonth'].invalid">
+                        Enter card exp month
+                      </small>
+                    </div>
+                    <div class="col-xs-4" [ngClass]="{ 'has-error':fh.hasError(creditForm, 'expYear')}">
+                      <input type="text" class="form-control alt" placeholder="YY*" [maxlength]="2"
+                             formControlName="expYear" required>
+                      <small class="text-danger" *ngIf="creditForm.hasError('invalidYear')">
+                        Invalid year
+                      </small>
+                      <small class="text-danger" *ngIf="isFormSubmitted && creditForm.controls['expYear'].errors">
+                        Enter card exp year
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(creditForm, 'state')}">
+                    <select class="form-control alt" formControlName="state"
+                            title="Select" required>
+                      <option value="" disabled>State*</option>
+                      <option *ngFor="let state of statesList" value="{{state.name}}">{{state.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(creditForm, 'ssn')}">
+                    <input class="form-control alt" type="text" formControlName="ssn" mask="(000-00-0000)0"
+                           placeholder="SSN:(***-**-****)*" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(creditForm, 'dob')}">
+                    <input class="form-control alt" type="text" formControlName="dob" [maxlength]="10"
+                           mask="00/00/0000" placeholder="Date of Birth: *(MM/DD/YYYY)" required>
+                  </div>
+                  <small class="text-danger" *ngIf="creditForm.controls['dob'].hasError('invalidDOB')">
+                    Enter valid DOB
+                  </small>
+                  <small class="text-danger" *ngIf="creditForm.controls['dob'].hasError('invalidDate')">
+                    Enter valid Date
+                  </small>
+                  <small class="text-danger" *ngIf="creditForm.controls['dob'].hasError('invalidMonth')">
+                    Enter valid Month
+                  </small>
+                  <small class="text-danger" *ngIf="creditForm.controls['dob'].hasError('invalidYear')">
+                    year must in between <strong>1947 and {{currentYear}} </strong>
+                  </small>
+                </div>
+                <div class="col-md-12">
+                  <div class="checkbox-inline">
+                    <input id="accept" type="checkbox" name="accept" title="Please accept"
+                           (change)="acceptedTerms($event.currentTarget.checked)" required>
+                    <label style="font-size: small" for="accept">By checking this box, I agree that T-Mobile, or others
+                      acting on its behalf, may call or text me at the number provided above in order to complete this
+                      order, and that they may use an auto dialer to do so. I understand that my agreement is not a
+                      condition of purchasing any goods or services.</label>
+                  </div>
+                  <div class="col-md-4"></div>
+                  <div class="col-md-12">
+                    <button class="btn btn-theme" [disabled]="!isAcceptedTerms"
+                            (click)="saveCreditRating()">Place Order
+                    </button>
+                  </div>
+                  <div class="col-md-5"></div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+

@@ -15,16 +15,16 @@ export class FormHelperService {
     return this.getControl(<any> form.controls[prop[0]], ...prop.slice(1));
   }
 
-  public matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
+  public matchingEmails(emailKey: string, confirmEmailKey: string) {
     return (group: FormGroup): {
       [key: string]: any
     } => {
-      let password = group.controls[passwordKey];
-      let confirmPassword = group.controls[confirmPasswordKey];
+      let email = group.controls[emailKey];
+      let confirmEmail = group.controls[confirmEmailKey];
 
-      if (password.value !== confirmPassword.value) {
+      if (email.value !== confirmEmail.value) {
         return {
-          mismatchedPasswords: true
+          mismatchedEmails: true
         };
       }
     };
@@ -36,10 +36,40 @@ export class FormHelperService {
     if (control.value !== '' && (control.value.length <= 5 || !EMAIL_REGEXP.test(control.value))) {
       return {incorrectMailFormat: true};
     }
-    return null;
   }
 
-  /* public static validateNumber(c: FormControl) {
-   return c.value > 0 && c.value < 100 ? null : {valid: false};
-   };*/
+  public expireValidator(expMonth: string, expYear: string) {
+    return (group: FormGroup): {
+      [key: string]: any
+    } => {
+      let month = Number(group.controls[expMonth].value);
+      let year = Number(group.controls[expYear].value);
+      if (month > 0 || year > 0) {
+        if (month < 1 || month > 12) {
+          return {
+            invalidMonth: true
+          };
+        }
+
+        if (year < 0 || year > 99) {
+          return {
+            invalidYear: true
+          };
+        }
+
+        let date: Date = new Date();
+        let curMonth: number = date.getMonth() + 1;
+        let curYear: number = parseInt(date.getFullYear().toString().substr(2, 2));
+        if (year < curYear) {
+          return {
+            invalidYear: true
+          };
+        } else if (year === curYear && month < curMonth) {
+          return {
+            invalidMonth: true
+          };
+        }
+      }
+    };
+  }
 }

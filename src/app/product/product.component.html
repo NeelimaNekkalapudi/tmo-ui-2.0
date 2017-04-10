@@ -5,10 +5,10 @@
       <label for="searchItems" class="col-sm-2 control-label search-label">Search Items</label>
       <div class="col-sm-4">
         <input type="text" class="form-control" id="searchItems"
-               formControlName="searchItems" placeholder="Search">
+               formControlName="searchItems" placeholder="Search" [attr.maxLength]="searchMaxLength">
       </div>
       <div class="buttons col-sm-2">
-        <a class="btn btn-theme" (click)="getFilterProducts(skuForm.value)">Go</a>
+        <button class="btn btn-theme" (click)="getFilterProducts(skuForm.value)" [disabled]="!skuForm.valid">Go</button>
       </div>
     </div>
     <div class="loading" *ngIf="showLoader">Loading&#8230;</div>
@@ -26,7 +26,7 @@
              *ngFor="let product of productList.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
           <!-- Excursion Listing -->
           <div class="thumbnail no-border  content no-padding thumbnail-ez-ezd clear-fix">
-            <div (click)="getAccessoryDetails(product.id);">
+            <div (click)="getProductDetails(product.id);">
               <div class="media">
                 <a class="media-link" data-gal="prettyPhoto">
                   <img src="{{product.picture}}" class="ez-thumbnail-photo" alt="">

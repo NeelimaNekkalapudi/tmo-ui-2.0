@@ -4,6 +4,7 @@ import {AppState} from '../app.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Accessories} from '../vo/accessories.vo';
 import {CartModel} from '../model/cart.model';
+import {ArrayUtil} from '../utils/array.util';
 @Component({
   selector: 'accessories',
   templateUrl: './accessories.component.html',
@@ -44,7 +45,9 @@ export class AccessoriesComponent implements OnInit {
   public getAccessories(value) {
     let enterValue = value.searchItems;
     if (enterValue.length > 0 && enterValue.trim() !== '') {
-      console.log('Go Button Clicked', value);
+      this.accessoriesList = ArrayUtil.filterArray(this.accessoriesList, enterValue);
+    } else {
+      this.getAllAccessories();
     }
   }
 

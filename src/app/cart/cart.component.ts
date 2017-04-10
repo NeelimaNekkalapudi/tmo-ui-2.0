@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {CartModel} from '../model/cart.model';
-import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 import {Item} from '../vo/item.vo';
 import {Accessories} from '../vo/accessories.vo';
 import {AppState} from '../app.service';
-import {Router} from "@angular/router";
+
 @Component({
   selector: 'addTo-cart',
   templateUrl: './cart.component.html'
@@ -13,10 +13,10 @@ import {Router} from "@angular/router";
 export class CartComponent implements OnInit {
   public cartItemsDetails: Item[] = [];
   public totalCartAmount = 0;
-  private data: Observable<CartModel>;
 
   constructor(private appState: AppState,
-              private cartModel: CartModel,private router: Router) {
+              private cartModel: CartModel,
+              private router: Router) {
 
   }
 
@@ -41,13 +41,13 @@ export class CartComponent implements OnInit {
     console.log(this.cartItemsDetails, this.totalCartAmount);
   }
 
+  public checkout(cartItems: Item[]) {
+    let link = ['/checkout'];
+    this.router.navigate(link);
+  }
+
   private submitState(value) {
     console.log('submitState', value);
     this.appState.set('value', value);
-  }
-
-  public checkout(cartItems:Item[]){
-    let link = ['/checkout'];
-    this.router.navigate(link);
   }
 }

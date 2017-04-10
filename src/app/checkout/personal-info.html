@@ -1,0 +1,95 @@
+<tmo-header></tmo-header>
+<div class="wizard">
+  <a class="current">
+    <span class="badge badge-inverse">1</span>Personal Information
+  </a>
+  <span class="badge">2</span>Shipping & Billing Address
+  <span class="badge">3</span>Credit Information
+</div>
+
+<div class="wrapper">
+  <div class="content-area">
+    <section class="page-section with-sidebar sub-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 content field-container" id="content">
+            <h3 class="block-title alt">Personal Information</h3>
+            <!--Start of form -->
+            <form class="form-delivery" [formGroup]="personalForm" novalidate>
+              <div class="row profile-alert-min">
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(personalForm, 'firstName')}">
+                    <input type="text" formControlName="firstName" class="form-control alt"
+                           placeholder="First Name: *" required>
+                    <small class="text-danger" *ngIf="isFormSubmitted && personalForm.controls['firstName'].invalid">
+                      first name enter more than 3 letters
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(personalForm, 'lastName')}">
+                    <input type="text" formControlName="lastName" class="form-control alt"
+                           placeholder="Last Name: *" required>
+                    <small class="text-danger" *ngIf="isFormSubmitted && personalForm.controls['lastName'].invalid">
+                      last name enter more than 3 letters
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.mailFormat(personalForm, 'email')}">
+                    <input class="form-control alt" type="email" formControlName="email"
+                           placeholder="Email Address: *" required>
+                    <small class="text-danger" *ngIf="isFormSubmitted && personalForm.controls['email'].errors">
+                      enter valid email id
+                    </small>
+                    <small class="text-danger" *ngIf="isFormSubmitted && personalForm.hasError('incorrectMailFormat')">
+                      enter valid email id
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.mailFormat(personalForm, 'confirm')}">
+                    <input type="email" formControlName="confirm" class="form-control alt"
+                           placeholder="Confirm Email Address:*" required>
+                    <div class="alert-danger" *ngIf="personalForm.hasError('mismatchedEmails')">
+                      Email do not match
+                    </div>
+                    <small class="text-danger" *ngIf="isFormSubmitted && personalForm.controls['confirm'].invalid">
+                      re enter email id
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(personalForm, 'phoneNumber')}">
+                    <input type="text" formControlName="phoneNumber" class="form-control alt"
+                           placeholder="Enter Phone Number" [maxlength]="14"
+                           mask="(000) 000-0000" required>
+                    <small class="text-danger" *ngIf="isFormSubmitted && personalForm.controls['phoneNumber'].invalid">
+                      enter valid phone number
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'has-error':fh.hasError(personalForm, 'carrier')}">
+                    <select class="form-control alt" formControlName="carrier" title="carrier-info" required>
+                      <option value="" disabled>Carrier *</option>
+                      <option *ngFor="let car of carrierList" value="{{car.name}}">{{car.name}}</option>
+                    </select>
+                    <small class="text-danger" *ngIf="isFormSubmitted && personalForm.controls['carrier'].invalid">
+                      select carrier
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <button class="btn btn-theme"
+                          (click)="personalInfo(personalForm)">Next
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
