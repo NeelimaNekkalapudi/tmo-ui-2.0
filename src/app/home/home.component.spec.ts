@@ -1,21 +1,10 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  async,
-  TestBed,
-  ComponentFixture
-} from '@angular/core/testing';
-import { Component } from '@angular/core';
-import {
-  BaseRequestOptions,
-  ConnectionBackend,
-  Http
-} from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
-
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {BaseRequestOptions, ConnectionBackend, Http} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
 // Load the implementations that should be tested
-import { AppState } from '../app.service';
-import { HomeComponent } from './home.component';
-import { Title } from './title';
+import {AppState} from '../app.service';
+import {HomeComponent} from './home.component';
 
 describe(`Home`, () => {
   let comp: HomeComponent;
@@ -36,8 +25,7 @@ describe(`Home`, () => {
           },
           deps: [MockBackend, BaseRequestOptions]
         },
-        AppState,
-        Title,
+        AppState
       ]
     })
     .compileComponents(); // compile template and css

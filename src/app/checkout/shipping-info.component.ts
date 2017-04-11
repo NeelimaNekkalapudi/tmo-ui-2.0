@@ -7,6 +7,7 @@ import {creditCardValidator} from '../validators/CreditCardValidator';
 import {CCTypes} from '../validators/CCTypes';
 import {CCValidator} from '../validators/CCValidator';
 import {Router} from '@angular/router';
+import {ShippingInfo} from '../vo/shipping-info.vo';
 
 @Component({
   selector: 'shipping',
@@ -35,6 +36,8 @@ export class ShippingInformationComponent implements OnInit {
   public rating: AbstractControl;
   public isFormSubmitted: boolean = false;
   public creditTypesList: string[];
+  public localState = {value: ''};
+  public shippingInfo;
   private ccImgSrc = '../../assets/img/card/credit-card.png';
   private selectedCard = 'Card: NONE';
 
@@ -112,6 +115,7 @@ export class ShippingInformationComponent implements OnInit {
     //console.log(' Is Data Valid :: ', data.valid, ' Value is :: ', data.value);
     console.dir(' Is Data Valid :: ', data.valid, ' Value is :: ', data.value);
     this.isFormSubmitted = true;
+    this.shippingInfo = JSON.stringify(data.value as ShippingInfo);
     //this.copyAddressToBillingAddress();
     if (data.valid) {
       this.router.navigateByUrl('/checkout/creditInfo');
@@ -145,5 +149,6 @@ export class ShippingInformationComponent implements OnInit {
   private submitState(value) {
     console.log('submitState', value);
     this.appState.set('value', value);
+    this.localState.value = value;
   }
 }

@@ -7,7 +7,8 @@ export class Address {
   set zip(value: string) {
     this._zip = value;
   }
-
+  public address1: string;
+  public address2: string;
   public state: string;
   public city: string;
   private _zip: string;
