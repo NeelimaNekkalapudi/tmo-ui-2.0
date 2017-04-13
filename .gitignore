@@ -62,6 +62,7 @@ dll/
 .idea/
 *.swp
 .iml
+tmo-ui-2.0.iml
 
 # Angular #
 *.ngfactory.ts
